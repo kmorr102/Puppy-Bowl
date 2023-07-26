@@ -3,3 +3,27 @@
   margin: 0;
   box-sizing: border-box;
 }
+html{
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  font-size: 2em;
+  
+}
+
+header{
+  background-color:rgb(117, 186, 246);
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  padding:30px;
+  display: flex;
+}
+
+header, 
+nav{
+  display:flex;
+
+}
+.container{
+  display: flex;
+  flex-direction: column;
+  
+  
+}

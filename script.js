@@ -69,63 +69,61 @@ const removePlayer = async (playerId) => {
 };
 // Function to render all players to the DOM
 const renderAllPlayers = (playerList) => {
-// Initialize an empty string to store the HTML for player cards
-// Iterate through the playerList array
-// For each player, create an HTML string representing the player card
-// Append the player card HTML string to the playerContainerHTML
-// Update the playerContainer's innerHTML with the playerContainerHTML
     try {
-        let playerContainerHTML = '';
+        playerContainer.innerHTML = '';
         playerList.forEach((player) => {
-            playerContainerHTML += `
-                <div class="player-card">
-                    <h2>${player.name}</h2>
-                    <p>Position: ${player.position}</p>
-                    <p>Jersey Number: ${player.jerseyNumber}</p>
-                    <button onclick="fetchSinglePlayer(${player.id})">See details</button>
-                    <button onclick="removePlayer(${player.id})">Remove from roster</button>
+            const playerElement= document.createAttribute('div')
+            playerElement.classlist.add('player-card')
+            playerElement.innerHTML = `
+                    <h4>${player.id}</h4>
+                    <p>${player.name}</p>
+                    <p>${player.breed}</p>
+                    <p>${player.status}</p>
+                    <p>${player.imageUrl}</p>
+                    <button class= "detail-button" data-id="${player.id}">See details</button>
+                    <button class= "delete-button"data-id="${player.id})">Remove from roster</button>
                 </div>
             `;
+            const detailButton=playerContainer.querySelector("detail-button");
+               detailButton.addEventListener('click'),(event)=>{
+                event.preventDefault();
+               fetchSinglePlayer(player);
+               }
         });
-        playerContainer.innerHTML = playerContainerHTML;
-// Handle errors if there are issues rendering players
+        playerContainer.appendChild=playerElement;
+
     } catch (err) {
-        console.error('Uh oh, trouble rendering players!', err);
+        console.error('Uh oh, trouble rendering players!');
     }
 };
-// Function to render the form to add a new player
 const renderNewPlayerForm = () => {
-// Create an HTML string for the new player form
-// Update the newPlayerFormContainer's innerHTML with the formHTML
-// Add an event listener to the form submission
-// When the form is submitted, prevent the default form submission behavior
-// Get the form input values for the new player from the form fields
-// Create a new player object using the form input values
-// Call the addNewPlayer function with the new player object
-// Fetch all players again using fetchAllPlayers
-// Render all players with the updated player list using renderAllPlayers
-// Reset the form fields to clear the inputs
     try {
         const formHTML = `
-            <form id="new-player-form">
-                <label for="name">Name:</label>
-                <input type="text" id="name" name="name" required>
-                <label for="position">Position:</label>
-                <input type="text" id="position" name="position" required>
-                <label for="jerseyNumber">Jersey Number:</label>
-                <input type="number" id="jerseyNumber" name="jerseyNumber" required>
-                <button type="submit">Add New Player</button>
-            </form>
-        `;
+        <form id="new-player-form">
+        <label for="playerId">Player ID:</label>
+        <input type="text" id="playerId" name="playerId" required>
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+        <label for="breed">Breed:</label>
+        <input type="text" id="breed" name="breed" required>
+        <label for="position">Position:</label>
+        <input type="text" id="position" name="position" required>
+        <label for="imageUrl">Image URL:</label>
+        <input type="text" id="imageUrl" name="imageUrl" required>
+        <button type="submit">Add New Player</button>
+    </form>
+`;
         newPlayerFormContainer.innerHTML = formHTML;
         // Add event listener to the form submission
         const form = document.getElementById('new-player-form');
         form.addEventListener('submit', async (event) => {
             event.preventDefault();
-            const newPlayerObj = {
+            let newPlayerObj = {
+                id: form.id.value,
                 name: form.name.value,
+                breed: form.breed.value,
                 position: form.position.value,
-                jerseyNumber: form.jerseyNumber.value,
+                imgUrl: form.imgUrl.value,
             };
             await addNewPlayer(newPlayerObj);
             const updatedPlayers = await fetchAllPlayers();
