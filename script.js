@@ -63,10 +63,10 @@ const renderAllPlayers = async () => {
             playerElement.classList.add('player-card');
             playerElement.innerHTML = `
                 <h4>${player.id}</h4>
-                <p>Name: ${player.name}</p>
+                <h3>Name: ${player.name}</h3>
                 <p>Breed: ${player.breed}</p>
                 <p>Status: ${player.status}</p>
-                <img src="${player.imageUrl}" alt="${player.name}" width="200">
+                <img src="${player.imageUrl}" alt="${player.name}" width="150">
                 <button class="detail-button" data-id="${player.id}">See details</button>
                 <button class="delete-button" data-id="${player.id}">Remove from roster</button>
             `;
@@ -135,7 +135,7 @@ const renderSinglePlayerDetails = async (player) => {
         const playerDetails = await fetchSinglePlayer(player.id);
         const detailsContainer = document.createElement('div');
         detailsContainer.innerHTML = `
-            <h2>Player Details</h2>
+            <h3>Player Details</h3>
             <p>Name: ${playerDetails.name}</p>
             <p>Breed: ${playerDetails.breed}</p>
             <p>Status: ${playerDetails.status}</p>

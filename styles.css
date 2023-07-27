@@ -5,25 +5,102 @@
 }
 html{
   font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-  font-size: 2em;
+  font-size: 1em;
   
 }
 
 header{
+  display: flex;
   background-color:rgb(117, 186, 246);
   font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-  padding:30px;
-  display: flex;
+  font-size: 35px;
+  padding: 20px;
+  justify-content: space-between;
+  order:1;
 }
-
-header, 
-nav{
-  display:flex;
-
-}
+ 
 .container{
   display: flex;
   flex-direction: column;
-  
-  
+  padding: 10px;
+}
+#all-players-container{
+  display: flex;
+  flex-wrap: wrap;
+  order:3
+}
+.player-card{
+  display: flex;
+  flex-direction:column;
+  justify-content:flex-end;
+  align-items: stretch;
+  font-size: 14px;
+}
+p,h4{
+  display: flex;
+  flex-direction: row;
+  font-size: 12px;
+}
+
+h3{
+  color:green
+}
+img{
+  display: flex;
+  flex-direction: column-reverse;
+  margin-right: 40px;
+
+}
+
+form,
+#new-player-form{
+  display: flex;
+  flex-direction: column;
+  font-size: 16px;
+  order: 4;
+ 
+}
+
+input{
+  display: flex;
+  flex-direction: row;
+  border-style: solid;
+  border-width: 1px;
+}
+
+.detail-button,.delete-button{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 11px;
+  background-color:rgb(207, 246, 117);
+  color:black;
+  border-radius: 50%;
+  width: 80px;
+  padding:10px;
+  margin-bottom: 10px;
+  margin-top: 5px;
+}
+
+button{
+  display:flex;
+  flex-direction: row-reverse;
+  justify-content:flex-start;
+  font-size: 14px;
+  background-color: transparent;
+  font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  border-style: none;
+  color: green;
+
+
+}
+
+footer{
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(117, 186, 246);
+  color:rgb(117, 186, 246);
+  padding: 5px;
+  order:5;
+ 
 }
