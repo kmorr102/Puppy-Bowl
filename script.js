@@ -69,37 +69,41 @@ const removePlayer = async (playerId) => {
 };
 // Function to render all players to the DOM
 const renderAllPlayers = (playerList) => {
-    try {
-        playerContainer.innerHTML = '';
-        playerList.forEach((player) => {
-            const playerElement= document.createAttribute('div')
-            playerElement.classlist.add('player-card')
-            playerElement.innerHTML = `
-                    <h4>${player.id}</h4>
-                    <p>${player.name}</p>
-                    <p>${player.breed}</p>
-                    <p>${player.status}</p>
-                    <p>${player.imageUrl}</p>
-                    <button class= "detail-button" data-id="${player.id}">See details</button>
-                    <button class= "delete-button"data-id="${player.id})">Remove from roster</button>
-                </div>
-            `;
-            const detailButton=playerContainer.querySelector("detail-button");
-               detailButton.addEventListener('click'),(event)=>{
-                event.preventDefault();
-               fetchSinglePlayer(player);
-               }
-        });
-        playerContainer.appendChild=playerElement;
-
-    } catch (err) {
-        console.error('Uh oh, trouble rendering players!');
+    if(!playerList||playerList.length ===0){
+        playerContainer.innerHTML= `<h3> No Players Found</h3>`;
+        return;
     }
+    playerContainer.innerHTML="";
+    playerList.forEach((player)=>{
+        const playerElement= document.createElement('div');
+        playerElement.classList.add('player-card');
+        playerElement.innerHTML=` 
+            <h4>${player.players[name]}</h4>
+            <p>${player.players[id]}</p>
+            <p>${player.players[breed]}</p>
+            <p>${player.players[status]}</p>
+            <img src="${player.players[imageUrl]}" alt="${player.players[name]}">
+            <button class= "detail-button" data-id="${player.players[id]}"> See Details </button>
+            <button class= "delete-button" data-id="${player.players[id]}"> See Details </button>
+            `;
+        playerContainer.appendChild(playerElement);
+        let detailButton= playerElement.querySelector('.detail-button');
+        detailButton.addEventListener("click", (event) =>{
+            event.preventDefault();
+            fetchSinglePlayer(data.players[name]);
+        });
+        let deleteButton= playerElement.querySelector('.delete-button');
+        deleteButton.addEventListener("click", (event) =>{
+            event.preventDefault();
+            removePlayer(data.players[name]);
+        });
+    });
 };
+
 const renderNewPlayerForm = () => {
     try {
-        const formHTML = `
-        <form id="new-player-form">
+    const formHTML = `
+    <form id="new-player-form">
         <label for="playerId">Player ID:</label>
         <input type="text" id="playerId" name="playerId" required>
         <label for="name">Name:</label>
